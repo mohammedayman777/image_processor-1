@@ -7,7 +7,7 @@
     - Ahmed Ayman made filter 1 & 7 (Grayscale & Darken And Lighten).
     - Mohamed Ayman made filter 2 & 5 (Black And White & Flip).
     - Menu has 4 main options (Load / Filters / Save / Exit).
-    - Repo Link : https://github.com/yousefmahrous/image_processor/
+    - Rebo Link : https://github.com/yousefmahrous/image_processor/
 */
 #include <iostream>
 #include <string>
@@ -70,6 +70,50 @@ void rotate(Image& img) {
     }
 }
 
+void black_white(Image& img) {
+    for (int i = 0; i < img.width; ++i) {
+        for (int j = 0; j < img.height; ++j) {
+            unsigned int r = img(i, j, 0);
+            unsigned int g = img(i, j, 1);
+            unsigned int b = img(i, j, 2);
+            unsigned int luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+            unsigned int value = (luminance >= 128) ? 255 : 0;
+            for (int k = 0; k < img.channels; ++k) {
+                img(i, j, k) = value;
+                
+            }
+        }
+    }
+}
+
+void flip(Image& img) {
+    cout << "1 - Horizontal Flip" << endl;
+    cout << "2 - Vertical Flip" << endl;
+    int choose_flip;
+    cin >> choose_flip;
+    if (choose_flip == 1) {
+        for (int i = 0; i < img.width / 2; i++){
+            for (int j = 0; j < img.height; j++){
+                for (int k = 0; k < img.channels; k++){
+                    unsigned int temp = img(i, j, k);
+                    img(i, j, k)= img(img.width-i-1,j,k);
+                    img(img.width - i -1, j, k) = temp;
+                }
+            }
+        }
+    } else if (choose_flip == 2) {
+        for (int i = 0; i < img.width; i++){
+            for (int j = 0; j < img.height / 2; j++){
+                for (int k = 0; k < img.channels; k++){
+                    unsigned int temp = img(i, j, k);
+                    img(i, j, k) = img(i,img.height - j - 1, k);
+                    img(i, img.height - j - 1, k) = temp;
+                }
+            }
+        }
+    }
+}
+
 // Functions of Menu
 
 void save_fun(string open, Image& img) {
@@ -129,10 +173,14 @@ void load_fun(string open, Image& img) {
 void filter_fun(string open, Image& img) {
     cout << "Filter 1 // Invert" << endl;
     cout << "Filter 2 // Rotate" << endl;
+    cout << "Filter 3 // Black And White" << endl;
+    cout << "Filter 4 // Flip" << endl;
     string filter;
     cin >> filter;
     if (filter == "1") invert(img);
     else if (filter == "2") rotate(img);
+    else if (filter == "3") black_white(img);
+    else if (filter == "4") flip(img);
     else if (filter == "load") {
         cout << "Do you want to save the image before loading a new one? y / n" << endl;
         string saveBeforeLoad;
