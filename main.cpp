@@ -114,6 +114,48 @@ void flip(Image& img) {
     }
 }
 
+void darken_lighten(Image& img) { // Ahmed Ayman
+    cout << "1 - Dark" << endl;
+    cout << "2 - Light" << endl;
+    string choose;
+    cin >> choose;
+    if (choose == "1") {
+        for (int i = 0; i < img.width; ++i) {
+            for (int j = 0; j < img.height; ++j) {
+                for (int k = 0; k < img.channels; ++k) {
+                    int x = img(i, j, k) * 0.5;
+                    img(i, j, k) = x;
+                }
+            }
+        }
+    } else if (choose == "2") {
+        for (int i = 0; i < img.width; ++i) {
+            for (int j = 0; j < img.height; ++j) {
+                for (int k = 0; k < img.channels; ++k) {
+                    int x = img(i, j, k) * 1.5;
+                    if (x > 255) x = 255;
+                    img(i, j, k) = x;
+                }
+            }
+        }
+    }
+}
+void gray(Image& img) { // Ahmed Ayman
+    for (int i = 0; i < img.width; ++i) {
+        for (int j = 0; j < img.height; ++j) {
+            unsigned int avg = 0;
+            for (int k = 0; k < img.channels; ++k) {
+                avg += img(i, j, k);
+            }
+            avg /= 3;
+            for (int k = 0; k < img.channels; ++k) {
+                img(i, j, k) = avg;
+            }
+        }
+    }
+}
+
+
 // Functions of Menu
 
 void save_fun(string open, Image& img) {
@@ -175,12 +217,16 @@ void filter_fun(string open, Image& img) {
     cout << "Filter 2 // Rotate" << endl;
     cout << "Filter 3 // Black And White" << endl;
     cout << "Filter 4 // Flip" << endl;
+    cout << "Filter 5 // Darken_Lighten" << endl;
+    cout << "Filter 6 // Gray" << endl;
     string filter;
     cin >> filter;
     if (filter == "1") invert(img);
     else if (filter == "2") rotate(img);
     else if (filter == "3") black_white(img);
     else if (filter == "4") flip(img);
+    else if (filter == "5") darken_lighten(img);
+    else if (filter == "6") gray(img);
     else if (filter == "load") {
         cout << "Do you want to save the image before loading a new one? y / n" << endl;
         string saveBeforeLoad;
@@ -225,6 +271,4 @@ int main() {
     return 0;
 
 }
-
-
 
