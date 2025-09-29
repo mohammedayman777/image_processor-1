@@ -2,7 +2,7 @@
     - This file is a c++ file to image processor (Assignment 1) that contains filters who edit the photos with a menu.
     - Student 1 : Youssef Mahrous Abd El-Ghani Abd El-Fattah --> ID : 20240703 --> Section : S23.
     - Student 2 : Ahmed Ayman Fawzy Abbas --> ID : 20240016 --> Section : S33.
-    - Student 3 : Mohamed Ayman Fathallah Abd El-Rahman --> ID : 20240478. --> Section : S23.
+    - Student 3 : Mohamed Ayman Fathallah Abd El-Rahman --> ID : 20240478 --> Section : S23.
     - Youssef Mahrous made filter 3 & 6 (Invert & Rotation).
     - Ahmed Ayman made filter 1 & 7 (Grayscale & Darken And Lighten).
     - Mohamed Ayman made filter 2 & 5 (Black And White & Flip).
@@ -225,4 +225,5 @@ int main() {
     return 0;
 
 }
+
 
