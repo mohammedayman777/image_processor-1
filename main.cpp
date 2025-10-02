@@ -155,6 +155,53 @@ void gray(Image& img) { // Ahmed Ayman
     }
 }
 
+void frame(Image& img) {
+    Image temp(img.width * 1.1, img.height * 1.1);
+    cout << "1 - Simple Frame" << endl;
+    cout << "2 - Decorative frame" << endl;
+    int frame;
+    cin >> frame;
+    if (frame == 1) {
+        for (int i = 0; i < temp.width; ++i) {
+            for (int j = 0; j < temp.height; ++j) {
+                temp(i, j, 0) = 26;
+                temp(i, j, 1) = 35;
+                temp(i, j, 2) = 126;
+            }
+        }
+        for (int i = 0; i < img.width; ++i) {
+            for (int j = 0; j < img.height; ++j) {
+                for (int k = 0; k < img.channels; ++k) {
+                    temp(i + ((temp.width - img. width) / 2), j + ((temp.height - img. height) / 2), k) = img(i, j, k);
+                }
+            }
+        }
+        img = temp;
+    } else if (frame == 2) {
+        for (int i = 0; i < temp.width / 2; ++i) {
+            for (int j = 0; j < temp.height / 2; ++j) {
+                temp(i, j, 0) = 255;
+                temp(i, j, 1) = 215;
+                temp(i, j, 2) = 0;
+            }
+        }
+        for (int i = temp.width / 2; i < temp.width ; ++i) {
+            for (int j = temp.height / 2; j < temp.height; ++j) {
+                for (int k = 0; k < temp.channels; ++k) {
+                    temp(i, j, k) = 255;
+                }
+            }
+        }
+        for (int i = 0; i < img.width; ++i) {
+            for (int j = 0; j < img.height; ++j) {
+                for (int k = 0; k < img.channels; ++k) {
+                    temp(i + ((temp.width - img. width) / 2), j + ((temp.height - img. height) / 2), k) = img(i, j, k);
+                }
+            }
+        }
+        img = temp;
+    }
+}
 
 // Functions of Menu
 
@@ -219,6 +266,7 @@ void filter_fun(string open, Image& img) {
     cout << "Filter 4 // Flip" << endl;
     cout << "Filter 5 // Darken_Lighten" << endl;
     cout << "Filter 6 // Gray" << endl;
+    cout << "Filter 7 // Frame" << endl;
     string filter;
     cin >> filter;
     if (filter == "1") invert(img);
@@ -227,6 +275,7 @@ void filter_fun(string open, Image& img) {
     else if (filter == "4") flip(img);
     else if (filter == "5") darken_lighten(img);
     else if (filter == "6") gray(img);
+    else if (filter == "7") frame(img);
     else if (filter == "load") {
         cout << "Do you want to save the image before loading a new one? y / n" << endl;
         string saveBeforeLoad;
@@ -271,5 +320,6 @@ int main() {
     return 0;
 
 }
+
 
 
