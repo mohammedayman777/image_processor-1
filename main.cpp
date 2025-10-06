@@ -1,11 +1,12 @@
 /*
     - This file is a c++ file to image processor (Assignment 1) that contains filters who edit the photos with a menu.
-    - Student 1 : Youssef Mahrous Abd El-Ghani Abd El-Fattah --> ID : 20240703 --> Section : S33.
-    - Student 2 : Ahmed Ayman Fawzy Abbas --> ID : 20240016 --> Section : S33.
-    - Student 3 : Mohamed Ayman Fathallah Abd El-Rahman --> ID : 20240478 --> Section : S33.
-    - Youssef Mahrous made filter 3 & 6 (Invert & Rotation).
-    - Ahmed Ayman made filter 1 & 7 (Grayscale & Darken And Lighten).
-    - Mohamed Ayman made filter 2 & 5 (Black And White & Flip).
+    - Student 1 : Youssef Mahrous Abd El-Ghani Abd El-Fattah --> ID : 20240703 --> Section : S31.
+    - Student 2 : Ahmed Ayman Fawzy Abbas --> ID : 20240016 --> Section : S31.
+    - Student 3 : Mohamed Ayman Fathallah Abd El-Rahman --> ID : 20240478 --> Section : S31.
+    - Youssef Mahrous made filter 3 & 6 & 9 & 12 (Invert & Rotation & Frame & Blur).
+    - Ahmed Ayman made filter 1 & 7 & 10 & 4 (Grayscale & Darken And Lighten & Edges & Merge).
+    - Mohamed Ayman made filter 2 & 5 & 8 & 11 (Black And White & Flip & Crop & Resizing).
+    - We all made the menu.
     - Menu has 4 main options (Load / Filters / Save / Exit).
     - Repo Link : https://github.com/yousefmahrous/image_processor/
 */
@@ -114,7 +115,7 @@ void flip(Image& img) {
     }
 }
 
-void darken_lighten(Image& img) { // Ahmed Ayman
+void darken_lighten(Image& img) {
     cout << "1 - Dark" << endl;
     cout << "2 - Light" << endl;
     string choose;
@@ -140,7 +141,8 @@ void darken_lighten(Image& img) { // Ahmed Ayman
         }
     }
 }
-void gray(Image& img) { // Ahmed Ayman
+
+void gray(Image& img) {
     for (int i = 0; i < img.width; ++i) {
         for (int j = 0; j < img.height; ++j) {
             unsigned int avg = 0;
@@ -221,7 +223,7 @@ void blur(Image& img) {
                         }
                     }
                 }
-                
+
                 sum /= cnt;
                 temp(i, j, k) = sum;
             }
@@ -349,7 +351,3 @@ int main() {
     return 0;
 
 }
-
-
-
-
