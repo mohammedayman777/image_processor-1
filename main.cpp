@@ -203,6 +203,33 @@ void frame(Image& img) {
     }
 }
 
+void blur(Image& img) {
+    cout << "Please enter the radius : ";
+    int radius;
+    cin >> radius;
+    Image temp = img;
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            for (int k = 0; k < img.channels; k++) {
+                int sum = 0;
+                int cnt = 0;
+                for (int x = -radius; x <= radius; x++) {
+                    for (int y = -radius; y <= radius; y++) {
+                        if (x + i < img.width && x + i >= 0 && y + j < img.height && y + j >= 0) {
+                            sum += img(i + x, j + y, k);
+                            cnt++;
+                        }
+                    }
+                }
+                
+                sum /= cnt;
+                temp(i, j, k) = sum;
+            }
+        }
+    }
+    img = temp;
+}
+
 // Functions of Menu
 
 void save_fun(string open, Image& img) {
@@ -267,6 +294,7 @@ void filter_fun(string open, Image& img) {
     cout << "Filter 5 // Darken_Lighten" << endl;
     cout << "Filter 6 // Gray" << endl;
     cout << "Filter 7 // Frame" << endl;
+    cout << "Filter 8 // Blur" << endl;
     string filter;
     cin >> filter;
     if (filter == "1") invert(img);
@@ -276,6 +304,7 @@ void filter_fun(string open, Image& img) {
     else if (filter == "5") darken_lighten(img);
     else if (filter == "6") gray(img);
     else if (filter == "7") frame(img);
+    else if (filter == "8") blur(img);
     else if (filter == "load") {
         cout << "Do you want to save the image before loading a new one? y / n" << endl;
         string saveBeforeLoad;
@@ -320,6 +349,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
