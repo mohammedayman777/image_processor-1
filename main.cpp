@@ -9,6 +9,8 @@
     - We all made the menu.
     - Menu has 4 main options (Load / Filters / Save / Exit).
     - Repo Link : https://github.com/yousefmahrous/image_processor/
+    - Video Link : 
+    - Document Link : https://drive.google.com/file/d/1kmG1VQzlBIRxQEBMcgbVhRE50B_u57Xt/view?usp=drive_link
 */
 #include <iostream>
 #include <string>
