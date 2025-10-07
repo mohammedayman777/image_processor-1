@@ -233,7 +233,24 @@ void blur(Image& img) {
     }
     img = temp;
 }
-
+void crop(Image& img){
+    int x , y , w , h ;
+    cout << "Please enter crop dimensions x y width height \n";
+    cin >> x >> y >> w >> h;
+    if (x < 0 || y < 0 || x + w > img.width|| y + h > img.height) {
+        cout << "Invalid crop dimensions or position \n";
+        return;
+    }
+    Image crop( w , h ) ;
+    for(int i = 0 ; i< crop.width ; i++){
+        for(int j =0 ; j < crop.height ; j++){
+            for(int k =0 ; k < img.channels ; k++){
+                crop(i,j,k)=img(i+x,j+y,k);
+            }
+        }
+    }
+    img=crop;
+}
 // Functions of Menu
 
 void save_fun(string open, Image& img) {
@@ -299,6 +316,7 @@ void filter_fun(string open, Image& img) {
     cout << "Filter 6 // Gray" << endl;
     cout << "Filter 7 // Frame" << endl;
     cout << "Filter 8 // Blur" << endl;
+    cout << "Filter 9 // Crop" << endl;
     string filter;
     cin >> filter;
     if (filter == "1") invert(img);
@@ -309,6 +327,7 @@ void filter_fun(string open, Image& img) {
     else if (filter == "6") gray(img);
     else if (filter == "7") frame(img);
     else if (filter == "8") blur(img);
+    else if (filter == "9") crop(img);
     else if (filter == "load") {
         cout << "Do you want to save the image before loading a new one? y / n" << endl;
         string saveBeforeLoad;
@@ -353,3 +372,4 @@ int main() {
     return 0;
 
 }
+
