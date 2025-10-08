@@ -234,6 +234,47 @@ void blur(Image& img) {
     img = temp;
 }
 
+void crop(Image& img) {
+    int x , y , w , h ;
+    cout << "Please enter crop dimensions x  y width height : \n";
+    cin >> x >> y >> w >> h;
+    if (x < 0 || y < 0 || x + w > img.width|| y + h > img.height) {
+        cout << "Invalid crop dimensions or position \n";
+        return;
+    }
+    Image crop( w , h ) ;
+    for(int i = 0 ; i< crop.width ; i++){
+        for(int j =0 ; j < crop.height ; j++){
+            for(int k =0 ; k < img.channels ; k++){
+                crop(i,j,k)=img(i+x,j+y,k);
+            }
+        }
+    }
+    img=crop;
+}
+
+void resize(Image& img) {
+    int new_width , new_height ;
+    cout << "Enter new width and height: \n";
+    cin >> new_width >> new_height;
+    if (new_width <= 0 || new_height <= 0) {
+        cout << "Invalid dimensions \n";
+        return;
+    }
+    Image resize (new_width , new_height);
+    double base_w = double (img.width) / new_width;
+    double base_h = double (img.height)/ new_height;
+    for(int i =0 ; i < new_width ; i++){
+        for (int j =0 ; j < new_height; j++){
+            for(int k=0 ; k < img.channels ;k++){
+                resize(i,j,k)=img( min(int(i*base_w) , img.width-1) , min(int(j*base_h) , img.height-1) , k);
+            }
+        }
+    }
+    img = resize;
+    
+}
+
 // Functions of Menu
 
 void save_fun(string open, Image& img) {
@@ -299,6 +340,9 @@ void filter_fun(string open, Image& img) {
     cout << "Filter 6 // Gray" << endl;
     cout << "Filter 7 // Frame" << endl;
     cout << "Filter 8 // Blur" << endl;
+    cout << "Filter 9 // Crop" << endl;
+    cout << "Filter 10 // Resize" << endl;
+    
     string filter;
     cin >> filter;
     if (filter == "1") invert(img);
@@ -309,6 +353,8 @@ void filter_fun(string open, Image& img) {
     else if (filter == "6") gray(img);
     else if (filter == "7") frame(img);
     else if (filter == "8") blur(img);
+    else if (filter == "9") crop(img);
+    else if (filter == "10") resize(img);
     else if (filter == "load") {
         cout << "Do you want to save the image before loading a new one? y / n" << endl;
         string saveBeforeLoad;
@@ -353,5 +399,6 @@ int main() {
     return 0;
 
 }
+
 
 
