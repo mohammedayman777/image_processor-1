@@ -6,7 +6,7 @@
     - Youssef Mahrous made filter 3 & 6 & 9 & 12 (Invert & Rotation & Frame & Blur).
     - Ahmed Ayman made filter 1 & 7 & 10 & 4 (Grayscale & Darken And Lighten & Edges & Merge).
     - Mohamed Ayman made filter 2 & 5 & 8 & 11 (Black And White & Flip & Crop & Resizing).
-    - We all made the menu.
+    - Youssef Mahrous made the menu.
     - Menu has 4 main options (Load / Filters / Save / Exit).
     - Repo Link : https://github.com/yousefmahrous/image_processor/
     - Video Link : 
@@ -353,3 +353,4 @@ int main() {
     return 0;
 
 }
+
